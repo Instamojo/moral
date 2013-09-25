@@ -15,18 +15,16 @@ In your web page:
 <script src="dist/immoral.min.js"></script>
 <script>
 $(document).ready(function() {
-  $(document).ready(function() {
-    var options = {
-      content: '<iframe src="//localhost/" seamless></iframe>',
-      modalStyle: {
+  var options = {
+    content: '<iframe src="//localhost/" seamless></iframe>',
+    modalStyle: {
         'width': '980px',
         'height': '90%',
         'margin': '0 auto'
-      }
-    };
-    $.immoral(options);
-    $('#modal_demo_page').immoral();
-  });
+        },
+  };
+  $.immoral(options);
+  $('#modal_demo_page').immoral();
 });
 </script>
 
