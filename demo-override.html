@@ -19,6 +19,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('#modal-1').immoral({
+        content: '<iframe src="http://localhost" seamless></iframe>',
         modalStyle: {
           'width': '980px',
           'height': '90%',
@@ -27,24 +28,7 @@
         }
       });
       $('#modal-2').immoral({
-        modalStyle: {
-          'width': '980px',
-          'height': '90%',
-          'margin': '0 auto',
-          'background': 'white',
-        }
-      });
-      $('#modal-3').immoral({
-        content: '<p>Some custom html.</p>',
-        modalStyle: {
-          'width': '980px',
-          'height': '90%',
-          'margin': '0 auto',
-          'background': 'white',
-        }
-      });
-      $('#modal-4').immoral({
-        content: '<p>The effin\' override.</p>',
+        content: '<iframe src="http://localhost/info.php" seamless></iframe>',
         modalStyle: {
           'width': '980px',
           'height': '90%',
@@ -60,16 +44,11 @@
     <h1>Immoral</h1>
   </header>
   <section role="main">
-    <p>This will open a <a id="modal-1" href="http://localhost/" rel="modal">modal</a>.</p>
-    <p>This will open another <a id="modal-2" href="#test-modal" rel="modal">modal</a>.</p>
-    <p>And this will open will be yet another <a id="modal-3" href="#" rel="modal">modal</a>.</p>
-    <p>And this is damned override <a id="modal-4" href="http://localhost/" rel="modal">modal</a>.</p>
+    <p>This will open the first <a id="modal-1" href="http://localhost" rel="modal">modal</a>.</p>
+    <p>This will open the second <a id="modal-2" href="http://localhost/info.php" rel="modal">modal</a>.</p>
   </section>
   <footer role="contentinfo">
     <p>A spunky clean flexible no-forced-design modal library.</p>
   </footer>
-  <div id="test-modal" style="display: none;">
-    <p>Some testing data for a modal.</p>
-  </div>
 </body>
 </html>
