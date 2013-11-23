@@ -6,12 +6,7 @@
  * Licensed under the MIT license.
 ###
 
-$ = jQuery
-
-if !$
-  return false
-
-$ ->
+;do ($ = jQuery) ->
   $.fn.immoral = (options) ->
     # Global Settings
     globals = {
@@ -66,10 +61,10 @@ $ ->
 
   # Handles the click events
   eventHandler = (element) ->
-    $(element).on 'click', (e) ->
+    $(element).bind 'click', (e) ->
       e.preventDefault()
       openModal(element) # Open modal
-    $(element.settings.modalContainer).on 'click', 'a[rel="modal:close"]', (e) ->
+    $(element.settings.modalContainer).delegate 'a[rel="modal:close"]', 'click', (e) ->
       e.preventDefault()
       closeModal(element) # Close modal
     $(document).keydown element, (e) ->
@@ -104,8 +99,8 @@ $ ->
   modalInit = (element) ->
     options = element.settings # Get options
 
-    modalContainer = $(options.modalContainer)
-    modalContent = $(modalContainer).find('.' + options.modalContentClass)
+    $modalContainer = $(options.modalContainer)
+    $modalContent = $modalContainer.find('.' + options.modalContentClass)
 
     link = $(element).attr('href')
 
@@ -117,8 +112,8 @@ $ ->
       else if /#+/.test(link)
         content = $(link).html() # html on page
 
-    $(modalContent).html(content) # Put content inside
-    $(modalContent).prepend(options.modalCloseButton) # Attach close button
+    $modalContent.html(content) # Put content inside
+    $modalContent.prepend(options.modalCloseButton) # Attach close button
 
     applyStyles(element) # Apply styles
 
@@ -126,23 +121,23 @@ $ ->
   openModal = (element) ->
     options = element.settings # Get options
 
-    modalShadow = $(options.modalShadow)
-    modalContainer = $(options.modalContainer)
+    $modalShadow = $(options.modalShadow)
+    $modalContainer = $(options.modalContainer)
 
     modalInit(element) # Initialize modal
 
-    $(modalShadow).fadeIn()
-    $(modalContainer).fadeIn()
+    $modalShadow.fadeIn()
+    $modalContainer.fadeIn()
 
   # Private function for closing modal
   closeModal = (element) ->
     options = element.settings # Get options
 
-    modalShadow = $(options.modalShadow)
-    modalContainer = $(options.modalContainer)
+    $modalShadow = $(options.modalShadow)
+    $modalContainer = $(options.modalContainer)
 
-    $(modalShadow).fadeOut()
-    $(modalContainer).fadeOut()
+    $modalShadow.fadeOut()
+    $modalContainer.fadeOut()
 
     emptyModal(element) # time to clear the modal
 
@@ -150,16 +145,21 @@ $ ->
   emptyModal = (element) ->
     options = element.settings # Get options
 
-    $(options.modalContainer).find('.' + options.modalContentClass).empty()
+    $modalContainer = options.modalContainer
+
+    $modalContainer.find('.' + options.modalContentClass).empty()
 
   # Private function to apply default styles
   applyStyles = (element) ->
     options = element.settings # Get options
 
-    $(options.modalShadow).css(options.modalShadowStyle)
-    $(options.modalContainer).css(options.modalContainerStyle)
-    $(options.modalContainer).find('.modal-content').css(options.modalContentStyle)
-    $(options.modalContainer).find('.modal').css(options.modalStyle)
+    $modalShadow = options.modalShadow
+    $modalContainer = options.modalContainer
+
+    $modalShadow.css(options.modalShadowStyle)
+    $modalContainer.css(options.modalContainerStyle)
+    $modalContainer.find('.modal-content').css(options.modalContentStyle)
+    $modalContainer.find('.modal').css(options.modalStyle)
 
   # Method for opening a modal
   $.fn.open = ->

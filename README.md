@@ -1,4 +1,4 @@
-# Immoral
+# Immoral [![Build Status](https://travis-ci.org/aniketpant/immoral.png?branch=master)](https://travis-ci.org/aniketpant/immoral)
 
 A spunky clean flexible no-forced-design opinionated modal library.
 
@@ -165,6 +165,8 @@ $(selector).immoral().close();
 ```
 
 ## Release History
+- v0.2.3 - Nov 16, 2013
+- v0.2.2 - Nov 15, 2013
 - v0.2.1 - Oct 31, 2013
 - v0.2.0 - Oct 16, 2013
 - v0.1.1 - Sep 27, 2013
