@@ -59,14 +59,14 @@
     $(element).bind 'click', (e) ->
       e.preventDefault()
       openModal(element) # Open modal
-    $(element.settings.modalContainer).delegate 'a[rel="modal:close"]', 'click', (e) ->
-      e.preventDefault()
-      closeModal(element) # Close modal
+
     $(document).keydown element, (e) ->
       if e.keyCode is 27
         closeModal(element)
     $(element.settings.modalContainer).click (e) ->
-      if e.target is e.currentTarget
+      if $(e.target).attr('rel') is 'modal:close'
+        closeModal(element)
+      else if e.target is e.currentTarget
         closeModal(element)
     return true
 

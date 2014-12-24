@@ -1,4 +1,4 @@
-/*! Immoral - v0.2.5 - 2014-03-21
+/*! Immoral - v0.2.5 - 2014-12-24
 * https://github.com/aniketpant/immoral
 * Copyright (c) 2014 Aniket Pant; Licensed MIT */
 (function() {
@@ -55,17 +55,15 @@
         e.preventDefault();
         return openModal(element);
       });
-      $(element.settings.modalContainer).delegate('a[rel="modal:close"]', 'click', function(e) {
-        e.preventDefault();
-        return closeModal(element);
-      });
       $(document).keydown(element, function(e) {
         if (e.keyCode === 27) {
           return closeModal(element);
         }
       });
       $(element.settings.modalContainer).click(function(e) {
-        if (e.target === e.currentTarget) {
+        if ($(e.target).attr('rel') === 'modal:close') {
+          return closeModal(element);
+        } else if (e.target === e.currentTarget) {
           return closeModal(element);
         }
       });
