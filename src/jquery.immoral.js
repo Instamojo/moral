@@ -61,7 +61,7 @@
         e.preventDefault();
         return openModal(element);
       });
-      $(document).keydown(element, function(e) {
+      $(element).keydown(function(e) {
         if (e.keyCode === 27) {
           return closeModal(element);
         }

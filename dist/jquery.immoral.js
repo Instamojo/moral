@@ -1,6 +1,6 @@
-/*! Immoral - v0.2.5 - 2014-12-24
+/*! Immoral - v0.2.5 - 2015-01-30
 * https://github.com/aniketpant/immoral
-* Copyright (c) 2014 Aniket Pant; Licensed MIT */
+* Copyright (c) 2015 Aniket Pant; Licensed MIT */
 (function() {
   (function($) {
     var applyStyles, closeModal, emptyModal, eventHandler, modalContainerInit, modalInit, openModal;
@@ -55,7 +55,7 @@
         e.preventDefault();
         return openModal(element);
       });
-      $(document).keydown(element, function(e) {
+      $(element).keydown(function(e) {
         if (e.keyCode === 27) {
           return closeModal(element);
         }
