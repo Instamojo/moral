@@ -145,3 +145,7 @@
   })(jQuery);
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=immoral.js.map
+*/

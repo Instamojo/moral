@@ -66,7 +66,7 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
-          'src/jquery.immoral.js': 'src-coffee/jquery.immoral.coffee', // 1:1 compile
+          'src/immoral.js': 'src-coffee/immoral.coffee', // 1:1 compile
           'test/test.js': 'src-coffee/test/test.coffee', // 1:1 compile
         }
       },
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
           bare: true
         },
         files: {
-          'src/jquery.immoral.js': 'src-coffee/jquery.immoral.coffee', // 1:1 compile
+          'src/immoral.js': 'src-coffee/immoral.coffee', // 1:1 compile
           'test/test.js': 'src-coffee/test/test.coffee', // 1:1 compile
         }
       },
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
           join: true
         },
         files: {
-          'src/jquery.immoral.js': 'src-coffee/jquery.immoral.coffee', // 1:1 compile
+          'src/immoral.js': 'src-coffee/immoral.coffee', // 1:1 compile
           'test/test.js': 'src-coffee/test/test.coffee', // 1:1 compile, identical output to join = false
         }
       },
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
           sourceMap: true
         },
         files: {
-          'src/jquery.immoral.js': 'src-coffee/jquery.immoral.coffee', // 1:1 compile
+          'src/immoral.js': 'src-coffee/immoral.coffee', // 1:1 compile
         }
       },
       glob_to_multiple: {
@@ -143,7 +143,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
-  grunt.registerTask('default', ['connect', 'coffee:compile', 'jshint', 'qunit', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('default', ['connect', 'coffee:compileWithMaps', 'jshint', 'clean', 'concat', 'uglify']);
 
   // Test task.
   grunt.registerTask('test', ['connect', 'jshint', 'qunit']);

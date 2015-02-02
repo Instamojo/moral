@@ -1,4 +1,4 @@
-/*! Immoral - v0.2.5 - 2015-01-30
+/*! Immoral - v0.2.5 - 2015-02-02
 * https://github.com/aniketpant/immoral
 * Copyright (c) 2015 Aniket Pant; Licensed MIT */
 (function() {
@@ -139,3 +139,7 @@
   })(jQuery);
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=immoral.js.map
+*/
