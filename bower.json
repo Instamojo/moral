@@ -1,9 +1,10 @@
 {
   "name": "immoral",
-  "version": "0.2.4",
-  "homepage": "https://github.com/aniketpant/immoral",
+  "version": "0.2.5",
+  "homepage": "https://github.com/Instamojo/moral",
   "authors": [
-    "Aniket Pant <me@aniketpant.com>"
+    "Aniket Pant <me@aniketpant.com>",
+    "Aakash Goel <aakashlpin@gmail.com>"
   ],
   "description": "A spunky clean flexible no-forced-design opinionated modal library.",
   "main": "dist/immoral.min.js",

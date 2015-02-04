@@ -1,9 +1,6 @@
 /*
  * immoral
- * https://github.com/aniketpant/immoral
- *
- * Copyright (c) 2013 Aniket Pant
- * Licensed under the MIT license.
+ * https://github.com/Instamojo/moral
 */
 
 

@@ -1,6 +1,6 @@
-/*! Immoral - v0.2.5 - 2015-02-02
-* https://github.com/aniketpant/immoral
-* Copyright (c) 2015 Aniket Pant; Licensed MIT */
+/*! Immoral - v0.2.5 - 2015-02-04
+* https://github.com/Instamojo/moral
+*/
 (function() {
   (function($) {
     var applyStyles, closeModal, emptyModal, eventHandler, modalContainerInit, modalInit, openModal;
