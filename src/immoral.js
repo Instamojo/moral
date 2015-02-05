@@ -22,29 +22,45 @@
           'top': '50%',
           'width': '50%',
           'height': '50%',
-          'transform': 'translate(-50%, -50%)',
+          'opacity': 0,
+          '-webkit-backface-visibility: hidden': '-webkit-backface-visibility: hidden',
+          '-moz-backface-visibility: hidden': '-moz-backface-visibility: hidden',
+          'backface-visibility: hidden': 'backface-visibility: hidden',
+          'transform': 'translateX(-50%) translateY(-50%)',
           'background': 'white',
           'text-align': 'left'
         },
         modalContainerStyle: {
           'width': '100%',
+          'height': '100%',
           'margin': '0px',
           'position': 'fixed',
           'top': '0',
           'left': '0',
           'right': '0',
           'bottom': '0',
-          'height': '100%',
-          'display': 'none',
+          'visibility': 'hidden',
           'z-index': '10000001',
           'background': 'rgba(0,0,0,.8)',
           'text-align': 'center',
           'overflow-y': 'auto',
-          '-webkit-overflow-scrolling': 'touch'
+          '-webkit-overflow-scrolling': 'touch',
+          'opacity': 0,
+          '-webkit-transition': 'all 0.3s',
+          '-moz-transition': 'all 0.3s',
+          'transition': 'all 0.3s'
         },
         modalContentStyle: {
           'width': '100%',
-          'height': '100%'
+          'height': '100%',
+          '-webkit-transform': 'scale(0.7)',
+          '-moz-transform': 'scale(0.7)',
+          '-ms-transform': 'scale(0.7)',
+          'transform': 'scale(0.7)',
+          'opacity': 0,
+          '-webkit-transition': 'all 0.3s',
+          '-moz-transition': 'all 0.3s',
+          'transition': 'all 0.3s'
         }
       };
       return this.each(function() {
@@ -76,7 +92,7 @@
       var options;
       options = element.settings;
       if (!$('.' + options.modalContainerClass).length) {
-        $('body').append('<div class="' + options.modalContainerClass + '" style="display: none"><div class="' + options.modalClass + '"><div class="' + options.modalContentClass + '"></div></div></div>');
+        $('body').append('<div class="' + options.modalContainerClass + '"><div class="' + options.modalClass + '"><div class="' + options.modalContentClass + '"></div></div></div>');
       }
       return $.immoral(element, {
         'modalContainer': $('.' + options.modalContainerClass)
@@ -106,7 +122,20 @@
       options = element.settings;
       $modalContainer = $(options.modalContainer);
       modalInit(element);
-      return $modalContainer.fadeIn();
+      $modalContainer.css({
+        visibility: 'visible',
+        opacity: 1
+      });
+      $('.' + options.modalClass).css({
+        opacity: 1
+      });
+      return $('.' + options.modalContentClass).css({
+        '-webkit-transform': 'scale(1)',
+        '-moz-transform': 'scale(1)',
+        '-ms-transform': 'scale(1)',
+        'transform': 'scale(1)',
+        'opacity': 1
+      });
     };
     closeModal = function(element) {
       var $modalContainer, options;
@@ -142,7 +171,3 @@
   })(jQuery);
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=immoral.js.map
-*/

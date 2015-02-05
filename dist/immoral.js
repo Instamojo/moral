@@ -1,4 +1,4 @@
-/*! Immoral - v0.2.5 - 2015-02-04
+/*! Immoral - v0.2.6 - 2015-02-05
 * https://github.com/Instamojo/moral
 */
 (function() {
@@ -19,25 +19,36 @@
           'top': '50%',
           'width': '50%',
           'height': '50%',
-          'transform': 'translate(-50%, -50%)',
+          'visibility': 'hidden',
+          '-webkit-backface-visibility: hidden': '-webkit-backface-visibility: hidden',
+          '-moz-backface-visibility: hidden': '-moz-backface-visibility: hidden',
+          'backface-visibility: hidden': 'backface-visibility: hidden',
+          '-webkit-transform': 'translateX(-50%) translateY(-50%)',
+          '-moz-transform': 'translateX(-50%) translateY(-50%)',
+          '-ms-transform': 'translateX(-50%) translateY(-50%)',
+          'transform': 'translateX(-50%) translateY(-50%)',
           'background': 'white',
           'text-align': 'left'
         },
         modalContainerStyle: {
+          'visibility': 'hidden',
           'width': '100%',
+          'height': '100%',
           'margin': '0px',
           'position': 'fixed',
           'top': '0',
           'left': '0',
           'right': '0',
           'bottom': '0',
-          'height': '100%',
-          'display': 'none',
           'z-index': '10000001',
           'background': 'rgba(0,0,0,.8)',
           'text-align': 'center',
           'overflow-y': 'auto',
-          '-webkit-overflow-scrolling': 'touch'
+          '-webkit-overflow-scrolling': 'touch',
+          'opacity': 0,
+          '-webkit-transition': 'all 0.3s',
+          '-moz-transition': 'all 0.3s',
+          'transition': 'all 0.3s'
         },
         modalContentStyle: {
           'width': '100%',
@@ -73,7 +84,8 @@
       var options;
       options = element.settings;
       if (!$('.' + options.modalContainerClass).length) {
-        $('body').append('<div class="' + options.modalContainerClass + '" style="display: none"><div class="' + options.modalClass + '"><div class="' + options.modalContentClass + '"></div></div></div>');
+        $('body').addClass('immoral-modal-shown').append('<div class="' + options.modalContainerClass + '" style="display: none"><div class="' + options.modalClass + '"><div class="' + options.modalContentClass + '"></div></div></div>');
+        $("<style> .immoral-modal-shown { visibility: visible; } .immoral-modal-shown ." + options.modalContainerClass + " { opacity:1; visibility: visible; }</style>").appendTo("head");
       }
       return $.immoral(element, {
         'modalContainer': $('.' + options.modalContainerClass)

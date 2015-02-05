@@ -19,29 +19,50 @@
         'top': '50%',
         'width': '50%',
         'height': '50%',
-        'transform': 'translate(-50%, -50%)',
+#        'visibility': 'hidden',
+        'opacity': 0;
+        '-webkit-backface-visibility: hidden',
+        '-moz-backface-visibility: hidden',
+        'backface-visibility: hidden',
+        #'-webkit-transform': 'translateX(-50%) translateY(-50%)',
+        #'-moz-transform': 'translateX(-50%) translateY(-50%)',
+        #'-ms-transform': 'translateX(-50%) translateY(-50%)',
+        'transform': 'translateX(-50%) translateY(-50%)',
         'background': 'white',
         'text-align': 'left',
       },
       modalContainerStyle: {
         'width': '100%',
+        'height': '100%',
         'margin': '0px',
         'position': 'fixed',
         'top': '0',
         'left': '0',
         'right': '0',
         'bottom': '0',
-        'height': '100%',
-        'display': 'none',
+        #'display': 'none',
+        'visibility': 'hidden',
         'z-index': '10000001',
         'background': 'rgba(0,0,0,.8)',
         'text-align': 'center',
         'overflow-y': 'auto',
         '-webkit-overflow-scrolling': 'touch',
+        'opacity': 0,
+        '-webkit-transition': 'all 0.3s',
+        '-moz-transition': 'all 0.3s',
+        'transition': 'all 0.3s'
       },
       modalContentStyle: {
         'width': '100%',
         'height': '100%',
+        '-webkit-transform': 'scale(0.7)',
+        '-moz-transform': 'scale(0.7)',
+        '-ms-transform': 'scale(0.7)',
+        'transform': 'scale(0.7)',
+        'opacity': 0,
+        '-webkit-transition': 'all 0.3s',
+        '-moz-transition': 'all 0.3s',
+        'transition': 'all 0.3s'
       }
     }
 
@@ -73,7 +94,7 @@
     options = element.settings # Get options
 
     if !$('.' + options.modalContainerClass).length
-      $('body').append('<div class="' + options.modalContainerClass + '" style="display: none"><div class="' + options.modalClass + '"><div class="' + options.modalContentClass + '"></div></div></div>')
+      $('body').append('<div class="' + options.modalContainerClass + '"><div class="' + options.modalClass + '"><div class="' + options.modalContentClass + '"></div></div></div>')
     $.immoral(element,
       {
         'modalContainer': $('.' + options.modalContainerClass)
@@ -109,7 +130,10 @@
 
     modalInit(element) # Initialize modal
 
-    $modalContainer.fadeIn()
+    #$modalContainer.fadeIn()
+    $modalContainer.css visibility: 'visible', opacity: 1
+    $('.' + options.modalClass).css opacity: 1
+    $('.' + options.modalContentClass).css '-webkit-transform': 'scale(1)', '-moz-transform': 'scale(1)', '-ms-transform': 'scale(1)', 'transform': 'scale(1)', 'opacity': 1
 
   # Private function for closing modal
   closeModal = (element) ->
