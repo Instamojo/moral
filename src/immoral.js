@@ -70,6 +70,21 @@
           return closeModal(element);
         }
       });
+
+      // http://stackoverflow.com/a/8849807/721084
+      var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+      var eventer = window[eventMethod];
+      var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+
+      // Listen to message from child window
+      eventer(messageEvent, function (e) {
+        var key = e.message ? 'message' : 'data';
+        var data = e[key];
+        if (data === 'onRequestClose') {
+          return closeModal(element);
+        }
+      }, false);
+
       return true;
     };
     modalContainerInit = function(element) {
