@@ -66,6 +66,20 @@
         closeModal(element)
       else if e.target is e.currentTarget
         closeModal(element)
+
+    # http://stackoverflow.com/a/8849807/721084
+    eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    eventer = window[eventMethod];
+    messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
+
+    # Listen to message from child window
+    eventer(messageEvent, (e) ->
+      key = e.message ? 'message' : 'data';
+      data = e[key];
+      if data == 'onRequestClose'
+        return closeModal(element)
+    , false);
+
     return true
 
   # Initialize modal container

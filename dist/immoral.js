@@ -1,4 +1,4 @@
-/*! Immoral - v0.2.5 - 2015-02-04
+/*! Immoral - v0.2.6 - 2016-04-18
 * https://github.com/Instamojo/moral
 */
 (function() {
@@ -51,6 +51,7 @@
       });
     };
     eventHandler = function(element) {
+      var eventMethod, eventer, messageEvent, _ref, _ref1;
       $(element).bind('click', function(e) {
         e.preventDefault();
         return openModal(element);
@@ -67,6 +68,23 @@
           return closeModal(element);
         }
       });
+      eventMethod = (_ref = window.addEventListener) != null ? _ref : {
+        'addEventListener': 'attachEvent'
+      };
+      eventer = window[eventMethod];
+      messageEvent = (_ref1 = eventMethod === 'attachEvent') != null ? _ref1 : {
+        'onmessage': 'message'
+      };
+      eventer(messageEvent, function(e) {
+        var data, key, _ref2;
+        key = (_ref2 = e.message) != null ? _ref2 : {
+          'message': 'data'
+        };
+        data = e[key];
+        if (data === 'onRequestClose') {
+          return closeModal(element);
+        }
+      }, false);
       return true;
     };
     modalContainerInit = function(element) {

@@ -54,6 +54,7 @@
       });
     };
     eventHandler = function(element) {
+      var eventMethod, eventer, messageEvent, _ref, _ref1;
       $(element).bind('click', function(e) {
         e.preventDefault();
         return openModal(element);
@@ -70,21 +71,23 @@
           return closeModal(element);
         }
       });
-
-      // http://stackoverflow.com/a/8849807/721084
-      var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
-      var eventer = window[eventMethod];
-      var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
-
-      // Listen to message from child window
-      eventer(messageEvent, function (e) {
-        var key = e.message ? 'message' : 'data';
-        var data = e[key];
+      eventMethod = (_ref = window.addEventListener) != null ? _ref : {
+        'addEventListener': 'attachEvent'
+      };
+      eventer = window[eventMethod];
+      messageEvent = (_ref1 = eventMethod === 'attachEvent') != null ? _ref1 : {
+        'onmessage': 'message'
+      };
+      eventer(messageEvent, function(e) {
+        var data, key, _ref2;
+        key = (_ref2 = e.message) != null ? _ref2 : {
+          'message': 'data'
+        };
+        data = e[key];
         if (data === 'onRequestClose') {
           return closeModal(element);
         }
       }, false);
-
       return true;
     };
     modalContainerInit = function(element) {
