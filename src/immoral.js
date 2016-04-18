@@ -54,7 +54,7 @@
       });
     };
     eventHandler = function(element) {
-      var eventMethod, eventer, messageEvent, _ref, _ref1;
+      var eventMethod, eventer, messageEvent;
       $(element).bind('click', function(e) {
         e.preventDefault();
         return openModal(element);
@@ -71,18 +71,12 @@
           return closeModal(element);
         }
       });
-      eventMethod = (_ref = window.addEventListener) != null ? _ref : {
-        'addEventListener': 'attachEvent'
-      };
+      eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
       eventer = window[eventMethod];
-      messageEvent = (_ref1 = eventMethod === 'attachEvent') != null ? _ref1 : {
-        'onmessage': 'message'
-      };
+      messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
       eventer(messageEvent, function(e) {
-        var data, key, _ref2;
-        key = (_ref2 = e.message) != null ? _ref2 : {
-          'message': 'data'
-        };
+        var data, key;
+        key = e.message ? 'message' : 'data';
         data = e[key];
         if (data === 'onRequestClose') {
           return closeModal(element);

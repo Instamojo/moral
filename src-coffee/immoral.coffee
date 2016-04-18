@@ -68,17 +68,17 @@
         closeModal(element)
 
     # http://stackoverflow.com/a/8849807/721084
-    eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
-    eventer = window[eventMethod];
-    messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
-
+    eventMethod = if window.addEventListener then 'addEventListener' else 'attachEvent'
+    eventer = window[eventMethod]
+    messageEvent = if eventMethod == 'attachEvent' then 'onmessage' else 'message'
     # Listen to message from child window
-    eventer(messageEvent, (e) ->
-      key = e.message ? 'message' : 'data';
-      data = e[key];
+    eventer messageEvent, (e) ->
+      key = if e.message then 'message' else 'data'
+      data = e[key]
       if data == 'onRequestClose'
         return closeModal(element)
-    , false);
+      return
+    , false
 
     return true
 
