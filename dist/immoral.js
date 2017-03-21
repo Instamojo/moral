@@ -1,10 +1,11 @@
-/*! Immoral - v0.2.6 - 2016-04-18
+/*! Immoral - v0.2.6 - 2017-03-21
 * https://github.com/Instamojo/moral
 */
 (function() {
   (function($) {
     var applyStyles, closeModal, emptyModal, eventHandler, modalContainerInit, modalInit, openModal;
     $.fn.immoral = function(options) {
+      // Global Settings
       var globals;
       globals = {
         content: '',
@@ -45,16 +46,19 @@
         }
       };
       return this.each(function() {
-        this.settings = $.extend(true, {}, globals, options);
-        modalContainerInit(this);
-        return eventHandler(this);
+        this.settings = $.extend(true, {}, globals, options); // Set each element
+        modalContainerInit(this); // Initialize modal container
+        return eventHandler(this); // Handle the events
       });
     };
+
+    // Handles the click events
     eventHandler = function(element) {
       var eventMethod, eventer, messageEvent;
       $(element).bind('click', function(e) {
         e.preventDefault();
-        return openModal(element);
+        return openModal(element); // Open modal
+
       });
       $(element).keydown(function(e) {
         if (e.keyCode === 27) {
@@ -68,9 +72,13 @@
           return closeModal(element);
         }
       });
+
+      // http://stackoverflow.com/a/8849807/721084
       eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
       eventer = window[eventMethod];
       messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+      
+      // Listen to message from child window
       eventer(messageEvent, function(e) {
         var data, key;
         key = e.message ? 'message' : 'data';
@@ -81,9 +89,12 @@
       }, false);
       return true;
     };
+
+    // Initialize modal container
     modalContainerInit = function(element) {
       var options;
-      options = element.settings;
+      options = element.settings; // Get options
+
       if (!$('.' + options.modalContainerClass).length) {
         $('body').append('<div class="' + options.modalContainerClass + '" style="display: none"><div class="' + options.modalClass + '"><div class="' + options.modalContentClass + '"></div></div></div>');
       }
@@ -101,35 +112,45 @@
         content = options.content;
       } else {
         if (/https*:\/\//.test(link)) {
-          content = '<iframe src="' + link + '" seamless></iframe>';
+          content = '<iframe src="' + link + '" seamless></iframe>'; // iframe
+
         } else if (/#+/.test(link)) {
           content = $(link).html();
         }
       }
-      $modalContent.html(content);
-      $modalContent.prepend(options.modalCloseButton);
-      return applyStyles(element);
+      $modalContent.html(content); // Put content inside
+      $modalContent.prepend(options.modalCloseButton); // Attach close button
+      return applyStyles(element); // Apply styles
     };
+
+    // Private function for opening modal
     openModal = function(element) {
       var $modalContainer, options;
       options = element.settings;
       $modalContainer = $(options.modalContainer);
-      modalInit(element);
+      modalInit(element); // Initialize modal
       return $modalContainer.fadeIn();
     };
+
+    // Private function for closing modal
     closeModal = function(element) {
       var $modalContainer, options;
-      options = element.settings;
+      options = element.settings; // Get options
       $modalContainer = $(options.modalContainer);
       $modalContainer.fadeOut();
-      return emptyModal(element);
+      return emptyModal(element); // time to clear the modal
+
     };
+
+    // Empty the modal
     emptyModal = function(element) {
       var $modalContainer, options;
       options = element.settings;
       $modalContainer = options.modalContainer;
       return $modalContainer.find('.' + options.modalContentClass).empty();
     };
+
+    // Private function to apply default styles
     applyStyles = function(element) {
       var $modalContainer, options;
       options = element.settings;
@@ -138,20 +159,22 @@
       $modalContainer.find('.' + options.modalContentClass).css(options.modalContentStyle);
       return $modalContainer.find('.' + options.modalClass).css(options.modalStyle);
     };
+
+    // Method for opening a modal
     $.fn.open = function() {
       return openModal(this);
     };
+
+    // Method for closing a modal
     $.fn.close = function() {
       return closeModal(this);
     };
+
+    // Static method for updating settings
     return $.immoral = function(element, options) {
+      // Override default options with passed-in options.
       element.settings = $.extend(true, {}, element.settings, options);
       return 'immoralized';
     };
   })(jQuery);
-
 }).call(this);
-
-/*
-//@ sourceMappingURL=immoral.js.map
-*/
